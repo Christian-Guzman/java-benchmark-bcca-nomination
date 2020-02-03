@@ -17,7 +17,8 @@ public class Employees {
             System.out.println("[" + i + "]" + "Nominated by: " + nomination.name + ", Nominee: " + nomination.nomName);
             i += 1;
         }
-        while (true) {
+        boolean keepGoing = true;
+        while (keepGoing) {
             System.out.print("Would you like to approve[Y] or disapprove[N] someone or [Q]uit: ");
             final String approve = in.nextLine().toLowerCase();
             if (approve.equals("y")) {
@@ -25,15 +26,15 @@ public class Employees {
                 final Integer num = Integer.parseInt(in.nextLine());
                 nominations.get(num).approved = "Yes";
                 System.out.println(nominations.get(num).nomName + " Approved: " + nominations.get(num).approved);
-            }
-            if (approve.equals("n")) {
+            } else if (approve.equals("n")) {
                 System.out.print("Choose their respective number: ");
                 final Integer num = Integer.parseInt(in.nextLine());
                 nominations.get(num).approved = "No";
                 System.out.println(nominations.get(num).nomName + " Approved: " + nominations.get(num).approved);
-            }
-            if (approve.equals("q")) {
-                break;
+            } else if (approve.equals("q")) {
+                keepGoing = false;
+            } else {
+                System.out.println("Thats not a choice dude :|.");
             }
         }
         save(nominations);
